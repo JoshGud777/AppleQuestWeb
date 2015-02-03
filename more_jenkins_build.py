@@ -3,9 +3,9 @@ import platform
 import sys, os
 import unittest
 
-# import ChessWWW.cgi as cgi
+# import wwwApp.cgi as cgi
 import wwwApp.elo as elo
-# import ChessWWW.index as index
+# import wwwApp.index as index
 
 def main():
     print()
