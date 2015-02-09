@@ -1,9 +1,10 @@
+import binascii
+import cgi
+import hashlib
+import http.cookies as cookie
+import os
 import sqlite3
 import time
-import os
-import http.cookies as cookie
-import hashlib
-import binascii
 
 def open_conn(db):
     global conn, c
@@ -39,7 +40,7 @@ def add_user(username, pword, email=None):
     
 
 def issue_session_id(username, pword):
-
+    username = username.lower()
     authuser = check_user(username, pword)
     if authuser == True:
 
@@ -55,7 +56,8 @@ def issue_session_id(username, pword):
             sessionid = binascii.hexlify(os.urandom(512)).decode("utf-8")
 
             try:
-                c.execute("INSERT INTO sessions VALUES (?, ?, ?)", (sessionid, exp, username))
+                c.execute("DELETE FROM sessions WHERE username = ?", [username])
+                c.execute("INSERT INTO sessions VALUES (?, ?, ?)", [sessionid, exp, username])
                 sqlgood = True
             except:
                 sqlretry += 1
@@ -67,21 +69,46 @@ def issue_session_id(username, pword):
     return ('noauth', 'noauth')
 
 def renew_session_id(old_id, username):
+    username = username.lower()
     c.execute("SELECT * FROM sessions WHERE username =  ? AND id = ?", [username, old_id])
     dbdata = c.fetchone()
-
-    db_exp = int(dbdata[1])
     if dbdata == None:
-        pass
+        return False
+    db_exp = int(dbdata[1])
+    
     print(int(time.time()))
     print(db_exp)
     if int(time.time()) > db_exp:
         return ('expired', 'expired')
-    if int(time.time()) <= db_exp:
-        return ('new_id', 'new_exp')
+    elif int(time.time()) <= db_exp:
+        sqlgood = False
+        sqlretry = 0
+        while sqlgood == False:
+            exp = int(time.time()) + 300 # seconds till this is expired | 300 = 5 min | 1 = 1 sec
+            sessionid = binascii.hexlify(os.urandom(512)).decode("utf-8")
+            try:
+                c.execute("DELETE FROM sessions WHERE username = ?", [username])
+                c.execute("INSERT INTO sessions VALUES (?, ?, ?)", [sessionid, exp, username])
+                sqlgood = True
+            except:
+                sqlretry += 1
+                if sqlretry == 10:
+                    return ('sqlerror, sqlerror')
+                    
+        return (sessionid, exp)
+    
 
-def delete_session():
-    pass
+def delete_session(sessionid, username):
+    username = username.lower()
+    c.execute("SELECT * FROM sessions WHERE username = ? OR id = ?", [username, sessionid])
+    dbdata = c.fetchone()
+    if dbdata == None:
+        return True
+
+
+    c.execute("DELETE FROM sessions WHERE username = ? OR id = ?", [username, sessionid])
+
+    return True
 
 def check_user(username, pword):
     username = username.lower()
@@ -137,7 +164,17 @@ def save_close():
 def close():
     conn.close()
 
+def cookie():
+    print "Content-type: text/plain\n"
+
+if "HTTP_COOKIE" in os.environ:
+    print os.environ["HTTP_COOKIE"]
+else:
+    print "HTTP_COOKIE not set!"
+
+
 if __name__ == '__main__':
-    open_conn('ex.db')
-    print('OPENED CONNECTION TO \'ex.db\'',)
+    cookie()
+    #open_conn('AppleQuest.db')
+    #print('OPENED CONNECTION TO \'AppleQuest.db\'',)
     
