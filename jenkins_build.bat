@@ -22,7 +22,7 @@ set d=wwwApp
 echo ### Files to run pep8 and pyflakes on.
 echo ### - set lintfiles^=%%d%%/[FILENAME].py %%d%%/[FILENAME2].py
 echo.
-set lintfiles=%d%/index.py %d%/elo.py
+set lintfiles=%d%/SessionLogon.py %d%/index.py
 
 echo ### Each coverage must have its own line and be formatted
 echo ### - coverage run -p [filename].py 1>> tests.log 2>> tests.log

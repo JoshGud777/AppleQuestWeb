@@ -3,9 +3,7 @@ import platform
 import sys, os
 import unittest
 
-# import wwwApp.cgi as cgi
-import wwwApp.elo as elo
-# import wwwApp.index as index
+import wwwApp.SessionLogon as SL
 
 
 def main():
