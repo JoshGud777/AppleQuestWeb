@@ -66,8 +66,19 @@ def issue_session_id(username, pword):
     
     return ('noauth', 'noauth')
 
-def renew_session_id():
-    pass
+def renew_session_id(old_id, username):
+    c.execute("SELECT * FROM sessions WHERE username =  ? AND id = ?", [username, old_id])
+    dbdata = c.fetchone()
+
+    db_exp = int(dbdata[1])
+    if dbdata == None:
+        pass
+    print(int(time.time()))
+    print(db_exp)
+    if int(time.time()) > db_exp:
+        return ('expired', 'expired')
+    if int(time.time()) <= db_exp:
+        return ('new_id', 'new_exp')
 
 def delete_session():
     pass
@@ -126,6 +137,7 @@ def save_close():
 def close():
     conn.close()
 
-open_conn('ex.db')
-print('OPENED CONNECTION TO \'ex.db\'',)
+if __name__ == '__main__':
+    open_conn('ex.db')
+    print('OPENED CONNECTION TO \'ex.db\'',)
     

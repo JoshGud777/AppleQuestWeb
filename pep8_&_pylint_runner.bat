@@ -7,13 +7,13 @@ set PATH=%PATH%;C:\Python34\;C:\Python34\Scripts
 Echo ### Set the Project Dir to 'd'
 echo ### - set d^=ChessWWW
 echo.
-set d=ChessWWW
+set d=wwwApp
 echo.
 
 echo ### Files to run pep8 and pyflakes on.
 echo ### - set lintfiles^=%%d%%/[FILENAME].py %%d%%/[FILENAME2].py
 echo.
-set lintfiles=%d%/index.py %d%/elo.py
+set lintfiles=%d%/index.py %d%/SessionLogon.py
 echo.
 
 echo ### Running and Saving Pep8 data.
