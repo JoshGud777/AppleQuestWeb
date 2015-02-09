@@ -1,7 +1,7 @@
 import binascii
 import cgi
 import hashlib
-import http.cookies as cookie
+import http.cookies
 import os
 import sqlite3
 import time
@@ -64,7 +64,7 @@ def issue_session_id(username, pword):
                 if sqlretry == 10:
                     return ('sqlerror, sqlerror')
                 
-        return (sessionid, exp)
+        return (sessionid, exp, username)
     
     return ('noauth', 'noauth')
 
@@ -95,7 +95,7 @@ def renew_session_id(old_id, username):
                 if sqlretry == 10:
                     return ('sqlerror, sqlerror')
                     
-        return (sessionid, exp)
+        return (sessionid, exp, username)
     
 
 def delete_session(sessionid, username):
@@ -164,17 +164,41 @@ def save_close():
 def close():
     conn.close()
 
-def cookie():
-    print "Content-type: text/plain\n"
+def cookie_read():
+    print ("Content-type: text/plain")
+    print()
+    cookies = http.cookies.BaseCookie()
+    cookies.load(os.environ["HTTP_COOKIE"])
+    if "HTTP_COOKIE" in os.environ:
+        y = cookies['id'].value
+        x = int(cookies['exp'].value)
+        z = cookies['username'].value
+        print (x, y, z)
+    else:
+        print ("HTTP_COOKIE not set!")
 
-if "HTTP_COOKIE" in os.environ:
-    print os.environ["HTTP_COOKIE"]
-else:
-    print "HTTP_COOKIE not set!"
+def cookie_wright(sessionid, exp, username):
+    cookie = http.cookies.BaseCookie()
+    cookie['id'] = sessionid
+    cookie['exp'] = exp
+    cookie['username'] = username
+    print ("Content-type: text/plain")
+    print(cookie)
+    print()
+    print('<html>')
+    print('Cookies added')
+    print(cookie)
+    print('</html>')
 
+def get_cgi_data():
+    
+
+def headder():
+    print ("Content-type: text/plain\n")
+    print('Random Test Text Goes HERE ---> ' + binascii.hexlify(os.urandom(64)).decode('utf8'))
 
 if __name__ == '__main__':
-    cookie()
+    headder()
     #open_conn('AppleQuest.db')
     #print('OPENED CONNECTION TO \'AppleQuest.db\'',)
     
