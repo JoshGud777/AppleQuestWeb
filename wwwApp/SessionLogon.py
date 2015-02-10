@@ -53,7 +53,7 @@ def issue_session_id(username, pword):
             db_display = dbdata[1]
 
             exp = int(time.time()) + 300 # seconds till this is expired | 300 = 5 min | 1 = 1 sec
-            sessionid = binascii.hexlify(os.urandom(512)).decode("utf-8")
+            sessionid = binascii.hexlify(os.urandom(16)).decode("utf-8")
 
             try:
                 c.execute("DELETE FROM sessions WHERE username = ?", [username])
@@ -165,40 +165,89 @@ def close():
     conn.close()
 
 def cookie_read():
-    print ("Content-type: text/plain")
-    print()
-    cookies = http.cookies.BaseCookie()
-    cookies.load(os.environ["HTTP_COOKIE"])
+    
     if "HTTP_COOKIE" in os.environ:
+        cookies = http.cookies.BaseCookie()
+        cookies.load(os.environ["HTTP_COOKIE"])
         y = cookies['id'].value
-        x = int(cookies['exp'].value)
+        x = cookies['exp'].value
         z = cookies['username'].value
-        print (x, y, z)
+        print('<br>')
+        print('<br>')
+        print('Your Cookie data:')
+        print('<p>old session id: ' + y +'</p>')
+        print('old exp: ' + x)
+        print('<br>')
+        print('old userename: ' + z)
+        print('<br>')
     else:
         print ("HTTP_COOKIE not set!")
 
 def cookie_wright(sessionid, exp, username):
+    headder()
     cookie = http.cookies.BaseCookie()
     cookie['id'] = sessionid
     cookie['exp'] = exp
     cookie['username'] = username
-    print ("Content-type: text/plain")
     print(cookie)
     print()
-    print('<html>')
-    print('Cookies added')
-    print(cookie)
-    print('</html>')
 
 def get_cgi_data():
-    
+    cgidata = cgi.FieldStorage()
+    return cgidata
 
 def headder():
-    print ("Content-type: text/plain\n")
-    print('Random Test Text Goes HERE ---> ' + binascii.hexlify(os.urandom(64)).decode('utf8'))
+    print("Content-type: text/html")
+    
+
+def print_html_start():
+    print('''
+          <html>
+          <form action="SessionLogon.py" method="POST">
+          Username 0:<br>
+          <input type="text" name="username0">
+          <br>
+          Password 1:<br>
+          <input type="password" name="password1">
+          <br>
+          <input type="hidden" name="key" value="send">
+          <input type="submit" value="Submit">
+          </form>
+          ''')
+    
+def print_html_end(x):
+    print("</html>")
+          
+def main():
+    form = get_cgi_data()
+    username = form.getvalue('username0')
+    pword = form.getvalue('password1')
+    if username == None:
+        username = 'None'
+    if pword == None:
+        pword = 'None'
+    open_conn('AppleQuest.db')
+    
+    try:
+        data = issue_session_id(username, pword)
+        x, y, z = data
+    except:
+        x = data[0]
+        y = data[1]
+        z = 'error'
+    save_close()
+    if form.getvalue('key') == 'send':
+        cookie_wright(x, y, z)
+    print_html_start()
+    print('Session ID: ' + x)
+    print('<br>')
+    print('Expiry: ' + str(y))
+    
+    cookie_read()
+    print_html_end(x)
 
 if __name__ == '__main__':
-    headder()
+   main()
     #open_conn('AppleQuest.db')
     #print('OPENED CONNECTION TO \'AppleQuest.db\'',)
     
