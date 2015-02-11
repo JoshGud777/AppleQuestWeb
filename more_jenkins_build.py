@@ -4,7 +4,7 @@ import sys, os
 import unittest
 
 # import wwwApp.cgi as cgi
-import wwwApp.Game as G
+import wwwApp.login as l
 # import wwwApp.index as index
 
 def main():
