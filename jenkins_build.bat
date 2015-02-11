@@ -15,33 +15,24 @@ echo.
 set PATH=%PATH%;C:\Python34\;C:\Python34\Scripts
 
 Echo ### Set the Project Dir to 'd'
-echo ### - set d^=ChessWWW
+echo ### - set d^=wwwApp
 echo.
-set d=wwwApp
+set dir=wwwApp
 
-echo ### Files to run pep8 and pyflakes on.
-echo ### - set lintfiles^=%%d%%/[FILENAME].py %%d%%/[FILENAME2].py
-echo.
-set lintfiles=%d%/SessionLogon.py %d%/index.py
+if "%1" == "pep8" goto :pep8
 
 echo ### Each coverage must have its own line and be formatted
-echo ### - coverage run -p [filename].py 1>> tests.log 2>> tests.log
+echo ### - coverage run -p jenkins_run_tests.py 
 echo.
 echo +++++++++++++++++++ RUN  TESTS +++++++++++++++++++
-echo coverage run -p jenkins_build.py 
-echo coverage run -p more_jenkins_build.py
-echo ::coverage run -p [FILENAME].py
+echo.
 
 set E=0
 
-coverage run -p jenkins_build.py
+coverage run -p jenkins_run_tests.py
 if %ERRORLEVEL% GTR 0 set E=1
 
-coverage run -p more_jenkins_build.py
-if %ERRORLEVEL% GTR 0 set E=1
-
-::coverage run -p [FILENAME].py
-
+echo.
 echo.
 echo ++++++++++++++++++ END OF TESTS ++++++++++++++++++
 echo.
@@ -62,21 +53,34 @@ coverage xml -o coverage/coverage.xml
 echo Done!
 echo.
 
+:pep8
+
+echo ### Files to run pep8 and pyflakes on.
+echo ### - set lintfiles^=wwwApp
+set lintfiles=wwwApp
+echo.
+
 echo ### Running and Saving Pep8 data.
-echo ### pep8 %%lintfiles%% ^> pep8.log
-pep8 %lintfiles% > pep8.log
+echo ### - pep8 --config=pep8.cfg %%lintfiles%% ^> pep8.log
+pep8 --config=pep8.cfg %lintfiles% > pep8.log
 echo Done!
 echo.
 
 echo ### Running and Saving Pylint data.
-echo ### - pylint --rcfile=pylint.rc %%lintfiles%% ^> pylint.log
-pylint --rcfile=pylint.rc %lintfiles% > pylint.log
+echo ### - pyflakes --rcfile=pylint.cfg %%lintfiles%% ^> pylint.log
+pylint --rcfile=pylint.cfg %lintfiles% > pylint.log
 echo Done!
 echo.
 
-echo.
+if "%1" == "pep8" EXIT /B 
+
 echo ##### END OF BUILD #####
-echo %E%
+if %E% == 0 (
+    echo PASS
+) else (
+    echo FAILED
+)
+
 pause
 echo.
 EXIT /B %E%

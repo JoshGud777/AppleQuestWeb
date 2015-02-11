@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<testsuite errors="0" failures="0" name="tests.boss_test_for_thing.MyTestCase-20150210213252" tests="3" time="0.000">
+	<testcase classname="tests.boss_test_for_thing.MyTestCase" name="test_format" time="0.000"/>
+	<testcase classname="tests.boss_test_for_thing.MyTestCase" name="test_nothing" time="0.000"/>
+	<testcase classname="tests.boss_test_for_thing.MyTestCase" name="test_windows_support" time="0.000"/>
+	<system-out>
+<![CDATA[]]>	</system-out>
+	<system-err>
+<![CDATA[]]>	</system-err>
+</testsuite>
