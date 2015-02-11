@@ -1,3 +1,14 @@
+import binascii
+import cgi
+import hashlib
+import http.cookies
+import os
+import sqlite3
+import time
+
+HTML_DIR = 'html\\'
+DIR_REDIRECT = 'html\\redirect\\'
+
 def open_conn(db):
     global conn, c
     conn = sqlite3.connect(db)
@@ -88,20 +99,28 @@ def cookie_wright(sessionid, exp, username):
     print(cookie)
     print()
 
-def main():
-	print('''
-				<html>
-				<form action="SessionLogon.py" method="POST">
-				Username 0:<br>
-				<input type="text" name="username0">
-				<br>
-				Password 1:<br>
-				<input type="password" name="password1">
-				<br>
-				<input type="hidden" name="key" value="send">
-				<input type="submit" value="Submit">
-				</form>
-				''')
+def print_me(filename):
+    f = open(filename, 'r')
 
+    for line in f:
+        print(line, end=' ')
+    f.close
+
+def print_header():
+    print('Content-type: text/html\n')
+
+def get_cgi_data():
+    cgidata = cgi.FieldStorage()
+    return cgidata
+
+def main():
+    print_header()
+    form = get_cgi_data()
+    if form.getvalue('key') == 'send_login':
+        print_me(DIR_REDIRECT + 'to_game.html')
+    else:
+        print_me(HTML_DIR + 'login0.html')
+        print_me(HTML_DIR + 'login1.html')
+                
 if __name__ == '__main__':
-	main()
+    main()

@@ -1,5 +1,6 @@
 import cgi
 
+HTML_DIR = 'html'
 
 def print_header():
     print("Content-type: text/html")
@@ -21,8 +22,8 @@ def get_form():
 
 def main():
     print_header()
-    print_me('index0.html')
-    print_me('index1.html')
+    print_me(HTML_DIR + '\index0.html')
+    print_me(HTML_DIR + '\index1.html')
 
 if __name__ == '__main__':
     main()
