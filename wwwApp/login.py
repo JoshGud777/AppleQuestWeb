@@ -11,7 +11,7 @@ def main():
 
         sessionid, exp, username = lib.issue_session_id(username, password)
 
-        cookie = cookie_wright(sessionid, exp, username)
+        cookie = lib.cookie_wright(sessionid, exp, username)
 
         print_header(cookie=cookie)
         lib.print_me(lib.REDIRECT_DIR + 'to_game.html')
