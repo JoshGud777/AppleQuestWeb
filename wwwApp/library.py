@@ -168,7 +168,7 @@ def cookie_wright(sessionid, exp, username):
 def get_cookies():
     cookie = http.cookies.BaseCookie()
     if 'HTTP_COOKIE' in os.environ:
-        cookie.load(os.enviro())
+        cookie.load(os.environ('HTTP_COOKIE'))
         print(cookie)
         print()
 

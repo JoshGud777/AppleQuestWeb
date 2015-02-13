@@ -9,7 +9,6 @@ def main():
         lib.print_me(lib.HTML_DIR + 'login0.html')
         lib.print_me(lib.HTML_DIR + 'login1.html')
         lib.get_cookies()
-    print(form)
     
 if __name__ == '__main__':
     main()
