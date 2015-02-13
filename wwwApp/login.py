@@ -3,6 +3,7 @@ import cgitb
 cgitb.enable()
 
 def main():
+    lib.open_conn(lib.DB_DIR + 'AppleQuest.db')
     form = lib.get_cgi_data()
     if form.getvalue('key') == 'send_login':
         username = form['username'].value
@@ -18,6 +19,6 @@ def main():
         lib.print_header()
         lib.print_me(lib.HTML_DIR + 'login0.html')
         lib.print_me(lib.HTML_DIR + 'login1.html')
-        
+    lib.close_conn()    
 if __name__ == '__main__':
     main()
