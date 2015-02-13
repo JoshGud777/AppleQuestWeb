@@ -17,6 +17,32 @@ def open_conn(db):
     conn = sqlite3.connect(db)
     c = conn.cursor()
 
+def save_conn():
+    conn.commit()
+
+def save_close_conn():
+    conn.commit()
+    conn.close()
+
+def close_conn():
+    conn.close()
+
+def add_user(username, pword, email=None):
+    display = username[:]
+    username = username.lower()
+    
+    salt = binascii.hexlify(os.urandom(64)) #64 bytes = 512 bits
+    utf8pword = pword.encode("utf-8")
+    utf8pword_salt = utf8pword + salt
+
+    hashed_salted_password = hashlib.sha512(utf8pword_salt)
+    enchexpass = hashed_salted_password.hexdigest()
+    try:
+        c.execute("INSERT INTO logon VALUES (?, ?, ?, ?, ?)", (username, display, enchexpass, salt, email))
+    except:
+        return False
+    return True
+
 def issue_session_id(username, pword):
     username = username.lower()
     authuser = check_user(username, pword)
@@ -46,6 +72,45 @@ def issue_session_id(username, pword):
     
     return ('noauth', 'noauth')
 
+def renew_session_id(old_id, username):
+    username = username.lower()
+    c.execute("SELECT * FROM sessions WHERE username =  ? AND id = ?", [username, old_id])
+    dbdata = c.fetchone()
+    if dbdata == None:
+        return False
+    db_exp = int(dbdata[1])
+    
+    print(int(time.time()))
+    print(db_exp)
+    if int(time.time()) > db_exp:
+        return ('expired', 'expired')
+    elif int(time.time()) <= db_exp:
+        sqlgood = False
+        sqlretry = 0
+        while sqlgood == False:
+            exp = int(time.time()) + 300 # seconds till this is expired | 300 = 5 min | 1 = 1 sec
+            sessionid = binascii.hexlify(os.urandom(512)).decode("utf-8")
+            try:
+                c.execute("DELETE FROM sessions WHERE username = ?", [username])
+                c.execute("INSERT INTO sessions VALUES (?, ?, ?)", [sessionid, exp, username])
+                sqlgood = True
+            except:
+                sqlretry += 1
+                if sqlretry == 10:
+                    return ('sqlerror, sqlerror')
+                    
+        return (sessionid, exp, username)
+
+def delete_session(sessionid, username):
+    username = username.lower()
+    c.execute("SELECT * FROM sessions WHERE username = ? OR id = ?", [username, sessionid])
+    dbdata = c.fetchone()
+    if dbdata == None:
+        return True
+
+    c.execute("DELETE FROM sessions WHERE username = ? OR id = ?", [username, sessionid])
+    return True
+  
 def check_user(username, pword):
     username = username.lower()
     c.execute("SELECT username, password, salt FROM logon WHERE username = ?", [username])
@@ -89,9 +154,6 @@ def slow_equal(a, b):
             return True
         else:
             return False
-
-def close():
-    conn.close()
 
 def cookie_wright(sessionid, exp, username):
     headder()
