@@ -179,7 +179,6 @@ def print_me(filename):
 
 def print_header(cookie=''):
     print('Content-type: text/html')
-    print('Set-Cookie: UserID=JohnDoe')
     print('Status: 200 OK')
     print(cookie)
     if not cookie == '':
