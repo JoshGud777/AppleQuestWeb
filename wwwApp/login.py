@@ -13,7 +13,7 @@ def main():
 
         cookie = lib.cookie_wright(sessionid, exp, username)
 
-        print_header(cookie=cookie)
+        lib.print_header(cookie=cookie)
         lib.print_me(lib.REDIRECT_DIR + 'to_game.html')
     else:
         lib.print_header()
