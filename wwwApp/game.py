@@ -1,4 +1,6 @@
 import library as lib
+import cgitb
+cgitb.enable()
 
 def cookie_read():
     
