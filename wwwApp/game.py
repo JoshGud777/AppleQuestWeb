@@ -1,42 +1,20 @@
-def print_me(filename):
-    f = open(filename, 'r')
+import library as lib
 
-    for line in f:
-        print(line, end=' ')
-    f.close
-
+def cookie_read():
+    
+    cookie = lib.get_cookies()
+    if cookie == None:
+        print('No Cookies')
+    else:
+        print(cookie)
+        
 def main():
-    print("Content-type: text/html")
-    print()
-    print('GAME.HTML')
+    lib.print_header()
+    cookie_read()
     
 if __name__ == '__main__':
     main()
 
-
-
-
-
-
-
-def cookie_read():
-    
-    if "HTTP_COOKIE" in os.environ:
-        cookies = http.cookies.BaseCookie()
-        cookies.load(os.environ["HTTP_COOKIE"])
-        y = cookies['id'].value
-        x = cookies['exp'].value
-        z = cookies['username'].value
-        print('<br>')
-        print('<br>')
-        print('Your Cookie data:')
-        print('<p>old session id: ' + y +'</p>')
-        print('old exp: ' + x)
-        print('<br>')
-        print('old userename: ' + z)
-        print('<br>')
-    else:
-        print ("HTTP_COOKIE not set!")
 
 
 
