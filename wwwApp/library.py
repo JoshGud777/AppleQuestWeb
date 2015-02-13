@@ -66,11 +66,11 @@ def issue_session_id(username, pword):
             except:
                 sqlretry += 1
                 if sqlretry == 10:
-                    return ('sqlerror, sqlerror')
+                    return ('sqlerror', 'sqlerror', 'sqlerror')
                 
         return (sessionid, exp, username)
     
-    return ('noauth', 'noauth')
+    return ('noauth', 'noauth', 'noauth')
 
 def renew_session_id(old_id, username):
     username = username.lower()
@@ -97,7 +97,7 @@ def renew_session_id(old_id, username):
             except:
                 sqlretry += 1
                 if sqlretry == 10:
-                    return ('sqlerror, sqlerror')
+                    return ('sqlerror')
                     
         return (sessionid, exp, username)
 
@@ -156,13 +156,11 @@ def slow_equal(a, b):
             return False
 
 def cookie_wright(sessionid, exp, username):
-    headder()
     cookie = http.cookies.BaseCookie()
     cookie['id'] = sessionid
     cookie['exp'] = exp
     cookie['username'] = username
-    print(cookie)
-    print()
+    return cookie
 
 
 def get_cookies():
@@ -179,12 +177,14 @@ def print_me(filename):
         print(line, end=' ')
     f.close
 
-def print_header():
+def print_header(cookie=''):
     print('Content-type: text/html')
     print('Set-Cookie: UserID=JohnDoe')
     print('Status: 200 OK')
-    print()
-    
+    print(cookie)
+    if not cookie == '':
+        print()
+        
 def get_cgi_data():
     cgidata = cgi.FieldStorage()
     return cgidata
