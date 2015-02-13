@@ -166,7 +166,7 @@ def cookie_wright(sessionid, exp, username):
     for morsel in cookie:
         cookie[morsel]['max-age'] = COOKIE_MAX_AGE
         cookie[morsel]['domain'] = COOKIE_DOMAIN
-        cookie[morsel]['path'] = COOKIE_PATH
+        #cookie[morsel]['path'] = COOKIE_PATH
     return cookie
 
 
