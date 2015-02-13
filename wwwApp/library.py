@@ -169,8 +169,8 @@ def get_cookies():
     cookie = http.cookies.BaseCookie()
     if 'HTTP_COOKIE' in os.environ:
         cookie.load(os.environ['HTTP_COOKIE'])
-        print(cookie)
-        print()
+        return cookie
+    return None
 
 def print_me(filename):
     f = open(filename, 'r')
