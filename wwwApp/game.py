@@ -32,7 +32,7 @@ def cookie_read():
         print('<!-- No Cookies -->')
     else:
         print('<!-- ', end="")
-        print(cookie + "     |     ", end="")
+        print(cookie, end="")
         print('-->')
         
 def main():
