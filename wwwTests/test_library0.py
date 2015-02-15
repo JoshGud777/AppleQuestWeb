@@ -21,7 +21,7 @@ Python Playform:
 ''' + platform.python_version() + '''
 
 Running Test:''')
-    unittest.main()
+    
 
 
 class VarsTestCase(unittest.TestCase):
@@ -40,4 +40,5 @@ class VarsTestCase(unittest.TestCase):
         self.assertEqual(lib.REDIRECT_DIR, 'redirect\\')
 
 if __name__ == "__main__":
+    unittest.main()
     main()
