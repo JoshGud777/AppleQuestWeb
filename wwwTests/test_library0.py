@@ -19,7 +19,9 @@ sys.version:
     
 Python Playform:
 ''' + platform.python_version() + '''
-**************************************************''')
+
+Running Test:''')
+    unittest.main()
 
 
 class VarsTestCase(unittest.TestCase):
@@ -39,4 +41,3 @@ class VarsTestCase(unittest.TestCase):
 
 if __name__ == "__main__":
     main()
-    unittest.main()
