@@ -11,7 +11,7 @@ def main():
     print('Test:')
     print('**************************************************')
     print("Jenkins Build File: " + os.path.basename(sys.argv[0]))
-    print("Library.py, FIX - TESTS NO LONGER VALID")
+    print("Library.py")
     print()
     
     print("sys.version: \n" + sys.version)
@@ -34,7 +34,7 @@ class VarsTestCase(unittest.TestCase):
         self.assertEqual(backandfrount, 'dbdb\\')
 
     def test_REDIRECT_DIR(self):
-        self.assertEqual(lib.REDIRECT_DIR, 'html\\redirect\\')
+        self.assertEqual(lib.REDIRECT_DIR, 'redirect\\')
 
 if __name__ == "__main__":
     main()

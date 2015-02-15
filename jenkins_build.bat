@@ -21,21 +21,31 @@ set dir=wwwApp
 
 if "%1" == "pep8" goto :pep8
 
-echo ### Each coverage must have its own line and be formatted
-echo ### - coverage run -p jenkins_run_tests.py 
+echo ### Each test must be in wwwTests and have test in its name
+echo ### - set E=0
+echo ### - set dir=wwwTests
+echo ### - FOR /R wwwTests %%F in (*test*.py) do (
+echo ### - coverage run -p -m %dir%.%%~nF
+echo ### - if %ERRORLEVEL% GTR 0 set E=1
+echo ### - )
 echo.
 echo +++++++++++++++++++ RUN  TESTS +++++++++++++++++++
 echo.
 
 set E=0
 
-coverage run -p jenkins_run_tests.py
+set dir=wwwTests
+
+FOR /R wwwTests %%F in (*test*.py) do (coverage run -p -m %dir%.%%~nF)
 if %ERRORLEVEL% GTR 0 set E=1
+)
+
 
 echo.
 echo.
 echo ++++++++++++++++++ END OF TESTS ++++++++++++++++++
 echo.
+if "%1" == "runtests" goto :end
 
 echo ### Coverage Reports
 echo ### - coverage combine
@@ -74,12 +84,14 @@ echo.
 
 if "%1" == "pep8" EXIT /B 
 
+:end
 echo ##### END OF BUILD #####
 if %E% == 0 (
-    echo PASS
+    echo PASS %E%
 ) else (
-    echo FAILED
+    echo FAILED %E%
 )
+
 
 pause
 echo.
