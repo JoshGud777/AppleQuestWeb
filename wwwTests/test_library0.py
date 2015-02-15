@@ -23,7 +23,6 @@ Python Playform:
 Running Test:''')
     
 
-
 class VarsTestCase(unittest.TestCase):
 
     def test_HTML_DIR(self):
@@ -40,5 +39,5 @@ class VarsTestCase(unittest.TestCase):
         self.assertEqual(lib.REDIRECT_DIR, 'redirect\\')
 
 if __name__ == "__main__":
-    unittest.main()
     main()
+    unittest.main()
