@@ -19,7 +19,7 @@ def html(value='', print_data=''):
 <form action="game.py">
 Command: 
 <input type="text" name="command" value="''' + value + '''">
-<input type="text" name="print" value="''' + value + '''">
+<input type="text" name="print" value="''' + print_data + '''">
 <br><br>
 <input type="submit" value="Submit">
 </form>
