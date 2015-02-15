@@ -7,20 +7,12 @@ import time
 from wwwApp import library as lib
 
 def main():
-    print('''
+    print('''^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Jenkins Test File: ''' + os.path.basename(sys.argv[0]) + '''
 **************************************************
 Test File(s):
 Library.py
-    
-sys.version:
-''' + sys.version + '''
-
-    
-Python Playform:
-''' + platform.python_version() + '''
-
-Running Test:''')
+'''
     
 
 class VarsTestCase(unittest.TestCase):
