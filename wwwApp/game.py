@@ -19,6 +19,7 @@ def html(value='', print_data=''):
 <form action="game.py">
 Command: 
 <input type="text" name="command" value="''' + value + '''">
+<input type="text" name="print" value="''' + value + '''">
 <br><br>
 <input type="submit" value="Submit">
 </form>
@@ -34,16 +35,22 @@ def cookie_read():
         print(cookie + "     |     ", end="")
         print('-->')
         
-def main(x):
+def main():
     lib.print_header()
     cookie_read()
     form = lib.get_cgi_data()
     x = form.getfirst("command")
+    print_data = form.getfirst("print")
     if x == None:
         x = ''
     elif type(x) != str:
         x = str(x)
-    html(x)
+
+    if print_data == None:
+        print_data = ''
+    elif type(x) != str:
+        x = str(x)
+    html(x, print_data)
     
 if __name__ == '__main__':
     main()
