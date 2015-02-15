@@ -2,6 +2,23 @@ import library as lib
 import cgitb
 cgitb.enable()
 
+def html():
+    print('''<!DOCTYPE html>
+<html>
+<body>
+<form action="/login.py" method="POST">
+First name:<br>
+<input type="text" name="username">
+<br>
+Last name:<br>
+<input type="password" name="password">
+<br><br>
+<input type="hidden" name="key" value="send_login">
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>''')
+
 def main():
     lib.open_conn(lib.DB_DIR + 'AppleQuest.db')
     form = lib.get_cgi_data()
@@ -17,8 +34,8 @@ def main():
         lib.print_me(lib.REDIRECT_DIR + 'to_game.html')
     else:
         lib.print_header()
-        lib.print_me(lib.HTML_DIR + 'login0.html')
-        lib.print_me(lib.HTML_DIR + 'login1.html')
+        html()
+        
     lib.close_conn()    
 if __name__ == '__main__':
     main()

@@ -8,7 +8,7 @@ import sqlite3
 import time
 
 HTML_DIR = 'html\\'
-REDIRECT_DIR = 'html\\redirect\\'
+REDIRECT_DIR = 'redirect\\'
 DB_DIR = 'db17b1a5c2b2f6d370af2c59c885d5db\\'
 COOKIE_MAX_AGE = 300
 COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
