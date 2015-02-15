@@ -7,18 +7,19 @@ import time
 from wwwApp import library as lib
 
 def main():
-    print()
-    print('Test:')
-    print('**************************************************')
-    print("Jenkins Build File: " + os.path.basename(sys.argv[0]))
-    print("Library.py")
-    print()
+    print('''
+Jenkins Test File: ''' + os.path.basename(sys.argv[0]) + '''
+**************************************************
+Test File(s):
+Library.py
     
-    print("sys.version: \n" + sys.version)
-    print()
+sys.version:
+''' + sys.version + '''
+
     
-    print("Python Playform \n" + platform.python_version())
-    print('**************************************************')
+Python Playform:
+''' + platform.python_version() + '''
+**************************************************''')
 
 
 class VarsTestCase(unittest.TestCase):
