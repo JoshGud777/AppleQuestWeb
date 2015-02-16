@@ -42,18 +42,18 @@ def main():
     lib.print_header()
     cookie_read()
     form = lib.get_cgi_data()
-    x = form.getfirst("command")
+    command = form.getfirst("command")
     print_data = form.getfirst("print")
-    if x is None:
-        x = ''
-    elif type(x) != str:
-        x = str(x)
+    if command is None:
+        command = ''
+    elif type(command) != str:
+        command = str(command)
 
     if print_data is None:
         print_data = ''
-    elif type(x) != str:
-        x = str(x)
-    html(x, print_data)
+    elif type(print_data) != str:
+        print_data = str(print_data)
+    html(command, print_data)
 
 if __name__ == '__main__':
     main()
