@@ -1,7 +1,9 @@
+'''index page of applequest.fallenofftheedge.com'''
 import cgi
 
 
 def html():
+    '''Prints the html to the client with any data we want added'''
     print('''<html>
 
 <head>
@@ -59,24 +61,20 @@ def html():
 
 
 def print_header():
+    '''HTTP Headder for CGI'''
     print("Content-type: text/html")
     print()
 
 
-def print_me(filename):
-    file = open(filename, 'r')
-
-    for line in file:
-        print(line, end=' ')
-    file.close
-
-
 def get_form():
+    '''gets the cgi data from the client and
+    returns it to us'''
     form = cgi.FieldStorage()
     return form
 
 
 def main():
+    '''Main'''
     print_header()
     html()
 

@@ -1,9 +1,11 @@
+'''game.py for applequest.fallenofftheedge.com'''
 import library as lib
 import cgitb
 cgitb.enable()
 
 
 def html(value='', print_data=''):
+    '''Prints the HTML to the client with varibals'''
     if print_data != '':
         print_data = '<p>' + print_data + '</p>'
     else:
@@ -29,6 +31,8 @@ Command:
 
 
 def cookie_read():
+    '''Reads the cookies sent in the request headers and prints the back
+    to the client'''
     cookie = lib.get_cookies()
     if cookie is None:
         print('<!-- No Cookies -->')
@@ -39,6 +43,7 @@ def cookie_read():
 
 
 def main():
+    '''main'''
     lib.print_header()
     cookie_read()
     form = lib.get_cgi_data()
