@@ -1,11 +1,11 @@
 import cgi
 
+
 def html():
-	print('''
-<html>
+    print('''<html>
 
 <head>
-	<title></title>
+  <title></title>
 </head>
 
 <body>
@@ -33,17 +33,17 @@ def html():
 <tr>
 <td>
 <label for="win">K value (Game Weight)</label>
-	</td>
-	<td valign="top">
-	<select name="k" value="20">
-	<option value="20">Defualt-20</option>
-	<option value="40">40</option>
-	<option value="30">30</option>
-	<option value="20">20</option>
-	<option value="15">15</option>
-	<option value="10">10</option>
-	</select>
-	</td>
+  </td>
+  <td valign="top">
+  <select name="k" value="20">
+  <option value="20">Defualt-20</option>
+  <option value="40">40</option>
+  <option value="30">30</option>
+  <option value="20">20</option>
+  <option value="15">15</option>
+  <option value="10">10</option>
+  </select>
+  </td>
 </tr>
 
 <tr>

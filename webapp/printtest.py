@@ -1,8 +1,11 @@
 from time import time
 import library as lib
 
+
 def print_linebyline():
-    startTime1 = time()
+    '''Prints 1000 lines off random strings one by oneand times the time
+    it takes'''
+    starttime1 = time()
     print('p2bpLsXyuZhQgKQD85w7')
     print('GtgPCHxt0KRhsNFNGAIK')
     print('pGdfyHULQJtTU8AqHSxe')
@@ -1003,13 +1006,15 @@ def print_linebyline():
     print('sKEpmM11nMlmsWL3HCgq')
     print('LdcNtglAfvEWvJwT2D45')
     print('LQz7Fwv6FJMkkZnCwlhM')
-    Time1 = time() - startTime1
-    print(Time1)
-    return Time1
+    time1 = time() - starttime1
+    print(time1)
+    return time1
 
 
 def print_docstring():
-    startTime2 = time()
+    '''prints 1000 lines in a doc string useing one print command and times it,
+    '''
+    starttime2 = time()
     print('''
 p2bpLsXyuZhQgKQD85w7
 GtgPCHxt0KRhsNFNGAIK
@@ -2012,20 +2017,22 @@ sKEpmM11nMlmsWL3HCgq
 LdcNtglAfvEWvJwT2D45
 LQz7Fwv6FJMkkZnCwlhM
 ''')
-    Time2 = time() - startTime2
-    print(Time2)
-    return Time2
+    time2 = time() - starttime2
+    print(time2)
+    return time2
 
 
 def main():
+    '''Prints a http header and then prints the one line function then
+    the docstring print and times each printing the tims at the end'''
     lib.print_header()
-    x = print_linebyline()
-    y = print_docstring()
+    linebylinetime = print_linebyline()
+    docstringtime = print_docstring()
     print()
     print('printtimes')
-    print(x)
-    print(y)
+    print(linebylinetime)
+    print(docstringtime)
 
-    
+
 if __name__ == '__main__':
     main()

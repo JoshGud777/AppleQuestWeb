@@ -4,8 +4,8 @@ echo ### --- del *.log
 echo ### --- RD /S /Q coverage
 echo ### --- RD /S /Q python_tests_xml
 echo ### --- RD /S /Q __pycache__
-echo ### --- RD /S /Q wwwApp\__pycache__
-echo ### --- RD /S /Q wwwTests\__pycache__
+echo ### --- RD /S /Q webapp\__pycache__
+echo ### --- RD /S /Q webapp_tests\__pycache__
 
 del *.coverage*
 del *.log

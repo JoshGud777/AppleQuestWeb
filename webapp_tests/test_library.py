@@ -13,12 +13,12 @@ Jenkins Test File: ''' + os.path.basename(sys.argv[0]) + '''
 Test File(s):
 Library.py
 ''')
-    
+
 
 class VarsTestCase(unittest.TestCase):
 
     def test_HTML_DIR(self):
-        self.assertEqual(lib.HTML_DIR, 'html\\') 
+        self.assertEqual(lib.HTML_DIR, 'html\\')
         pass
 
     def test_DB_DIR(self):

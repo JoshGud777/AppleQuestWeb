@@ -1,8 +1,13 @@
+'''
+Login script
+'''
 import library as lib
 import cgitb
 cgitb.enable()
 
+
 def html():
+    '''Prints all the HTML for the page.'''
     print('''<!DOCTYPE html>
 <html>
 <body>
@@ -19,7 +24,9 @@ Last name:<br>
 </body>
 </html>''')
 
+
 def main():
+    '''main - takes imput from user and issues session id for that user'''
     lib.open_conn(lib.DB_DIR + 'AppleQuest.db')
     form = lib.get_cgi_data()
     if form.getvalue('key') == 'send_login':
@@ -35,7 +42,9 @@ def main():
     else:
         lib.print_header()
         html()
-        
-    lib.close_conn()    
+
+    lib.close_conn()
+
+
 if __name__ == '__main__':
     main()

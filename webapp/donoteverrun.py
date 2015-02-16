@@ -1,20 +1,27 @@
+'''
+A simple program used to spit out random secuances of hex with db as the first
+two letters and as the last to. takes a bit of time to prosess
+'''
 import binascii
 import os
 
+
 def main():
+    '''Main Looping part'''
     print("Content-type: text/plain\n")
-    x = 0
-    while x < 5:
-        y = binascii.hexlify(os.urandom(16)).decode('utf8')
-        if y[0] == 'd' and y[1] == 'b' and y[-2] == 'd' and y[-1] == 'b':
+    loopnum = 0
+    while loopnum < 50:
+        data = binascii.hexlify(os.urandom(16)).decode('utf8')
+        if data[0] == 'd' and data[1] == 'b' and data[-2] == 'd' \
+           and data[-1] == 'b':
 
-            if x < 9:
-                z = ' :'
+            if loopnum < 9:
+                collon = '  : '
             else:
-                z = ':'
+                collon = ' : '
 
-            print(str(x+1) + z + y)
-            x += 1
+            print(str(loopnum+1) + collon + data)
+            loopnum += 1
 
 if __name__ == '__main__':
     main()
