@@ -64,11 +64,11 @@ def print_header():
 
 
 def print_me(filename):
-    f = open(filename, 'r')
+    file = open(filename, 'r')
 
-    for line in f:
+    for line in file:
         print(line, end=' ')
-    f.close
+    file.close
 
 
 def get_form():
