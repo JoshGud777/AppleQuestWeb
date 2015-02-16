@@ -15,9 +15,9 @@ echo.
 set PATH=%PATH%;C:\Python34\;C:\Python34\Scripts
 
 Echo ### Set the Project Dir to 'd'
-echo ### - set d^=wwwApp
+echo ### - set d^=www_app
 echo.
-set dir=wwwApp
+set dir=webapp
 
 if "%1" == "pep8" goto :pep8
 
@@ -34,9 +34,9 @@ echo.
 
 set E=0
 
-set dir=wwwTests
+set dir=webapp_tests
 
-FOR /R wwwTests %%F in (*test*.py) do (coverage run -p -m %dir%.%%~nF)
+FOR /R %dir% %%F in (*test*.py) do (coverage run -p -m %dir%.%%~nF)
 if %ERRORLEVEL% GTR 0 set E=1
 )
 
@@ -67,7 +67,7 @@ echo.
 
 echo ### Files to run pep8 and pyflakes on.
 echo ### - set lintfiles^=wwwApp
-set lintfiles=wwwApp
+set lintfiles=webapp
 echo.
 
 echo ### Running and Saving Pep8 data.

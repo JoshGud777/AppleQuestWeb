@@ -1007,6 +1007,7 @@ def print_linebyline():
     print(Time1)
     return Time1
 
+
 def print_docstring():
     startTime2 = time()
     print('''
@@ -2015,6 +2016,7 @@ LQz7Fwv6FJMkkZnCwlhM
     print(Time2)
     return Time2
 
+
 def main():
     lib.print_header()
     x = print_linebyline()
@@ -2023,5 +2025,7 @@ def main():
     print('printtimes')
     print(x)
     print(y)
+
+    
 if __name__ == '__main__':
     main()
