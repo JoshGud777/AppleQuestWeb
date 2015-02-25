@@ -14,3 +14,4 @@ RD /S /Q python_tests_xml
 RD /S /Q __pycache__
 RD /S /Q webapp\__pycache__
 RD /S /Q webapp_tests\__pycache__
+RD /S /Q webapp\db17b1a5c2b2f6d370af2c59c885d5db\*.db-journal
