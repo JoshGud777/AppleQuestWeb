@@ -1,5 +1,5 @@
-if "%%1" == "FULL" goto :FULL
-if "%%1" == "pycache" goto :pycache
+if "%1" == "FULL" goto :FULL
+if "%1" == "pycache" goto :pycache
 
 :FULL
 echo ### - Deleteing files ^& Removeing dirs
