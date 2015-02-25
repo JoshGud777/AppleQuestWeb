@@ -5,7 +5,7 @@ echo ##### START OF BUILD #####
 echo.
 
 echo ### Running cleanner.bat
-call cleanner.bat 1> out.log 2> error.log
+call cleanner.bat FULL 1> out.log 2> error.log
 echo Done!
 echo.
 
@@ -85,6 +85,9 @@ echo.
 if "%1" == "pep8" EXIT /B 
 
 :end
+echo ###Cleaning __pycache__ from workspace
+call cleanner.bat pycache 1> out.log 2> error.log
+
 echo ##### END OF BUILD #####
 if %E% == 0 (
     echo PASS %E%
