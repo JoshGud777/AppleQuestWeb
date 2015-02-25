@@ -12,5 +12,5 @@ del *.log
 RD /S /Q coverage
 RD /S /Q python_tests_xml
 RD /S /Q __pycache__
-RD /S /Q wwwApp\__pycache__
-RD /S /Q wwwTests\__pycache__
+RD /S /Q webapp\__pycache__
+RD /S /Q webapp_tests\__pycache__
