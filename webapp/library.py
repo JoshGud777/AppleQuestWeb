@@ -239,6 +239,13 @@ def print_header(cookie=''):
         print()
 
 
+def get_html(filepath):
+    '''For the given path it returns a str of all the data in that file.
+    \n and all'''
+    file = open(filepath)
+    txt = file.read()
+    return txt
+
 def get_cgi_data():
     '''gets the cgi data from the last form the client summited'''
     cgidata = cgi.FieldStorage()

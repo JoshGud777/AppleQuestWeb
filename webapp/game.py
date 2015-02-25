@@ -6,28 +6,13 @@ cgitb.enable()
 
 def html(value='', print_data=''):
     '''Prints the HTML to the client with varibals'''
+    html = lib.get_html(lib.HTML_DIR + 'game.html')
     if print_data != '':
         print_data = '<p>' + print_data + '</p>'
     else:
         print_data = '<!--Print data goes here, if there is any-->'
 
-    print('''<!DOCTYPE HTML>
-<html lang="en">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>AppleQuest - Game</title>
-</head>
-<body>
-''' + print_data + '''
-<form action="game.py">
-Command:
-<input type="text" name="command" value="''' + value + '''">
-<input type="text" name="print" value="''' + print_data + '''">
-<br><br>
-<input type="submit" value="Submit">
-</form>
-</body>
-</html>''')
+    print(html)
 
 
 def cookie_read():
