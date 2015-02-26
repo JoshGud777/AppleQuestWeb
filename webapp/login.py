@@ -6,7 +6,7 @@ import cgitb
 cgitb.enable()
 
 
-def html(error=''):
+def html_print(error=''):
     '''Prints all the HTML for the page.'''
     html = lib.get_html(lib.HTML_DIR + 'login.html')
     if error != '':
@@ -15,6 +15,7 @@ def html(error=''):
     else:
         html = html.replace('$$ERROR$$', '')
     print(html)
+
 
 def main():
     '''main - takes imput from user and issues session id for that user'''
@@ -28,26 +29,29 @@ def main():
         if session_info[0] == 'noauth':
             lib.print_header()
             error = '!!! Invalid Username OR Password !!!'
-            html(error)
-            
+            html_print(error)
+
         elif session_info[0] == 'sqlerror':
             lib.print_header()
-            error = 'Internal SQL error. </br> Please e-mail servgud777@gmail.com!'
-            html(error)
-            
+            error = 'Internal SQL error. </br> '\
+                    'Please e-mail servgud777@gmail.com!'
+            html_print(error)
+
         elif username == session_info[2]:
             sessionid, exp, username = session_info
             cookie = lib.cookie_wright(sessionid, exp, username)
             lib.print_header(cookie=cookie)
             lib.print_me(lib.REDIRECT_DIR + 'to_game.html')
+
         else:
             lib.print_header()
-            error = 'Internal SERVER error. </br> Please e-mail servgud777@gmail.com!'
-            html(error)
-            
+            error = 'Internal SERVER error. </br> '\
+                    'Please e-mail servgud777@gmail.com!'
+            html_print(error)
+
     else:
         lib.print_header()
-        html()
+        html_print()
 
     lib.close_conn()
 

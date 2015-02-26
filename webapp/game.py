@@ -4,13 +4,13 @@ import cgitb
 cgitb.enable()
 
 
-def html(value='', print_data=''):
-    '''Prints the HTML to the client with varibals'''
-    '''$$   printdata  $$
+def html_print(value='', print_data=''):
+    '''Prints the HTML to the client with varibals
+       $$   printdata  $$
        $$   command    $$
        $$ printcommand $$'''
     html = lib.get_html(lib.HTML_DIR + 'game.html')
-    
+
     if print_data != '':
         html = html.replace('$$printdata$$', print_data)
     else:
@@ -21,12 +21,12 @@ def html(value='', print_data=''):
     else:
         html = html.replace('$$command$$', '')
 
-    if True != False:
+    if True is not False:
         html = html.replace('$$printcommand$$', '')
     else:
         print('This is not the case you are looking for!')
         print('P.S. The world is about to end!!!')
-        
+
     print(html)
 
 
@@ -58,7 +58,7 @@ def main():
         print_data = ''
     elif type(print_data) != str:
         print_data = str(print_data)
-    html(command, print_data)
+    html_print(command, print_data)
 
 if __name__ == '__main__':
     main()

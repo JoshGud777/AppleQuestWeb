@@ -248,6 +248,7 @@ def get_html(filepath):
 
 
 def print_me(filename):
+    '''prints file to screen - use for redirects'''
     file = open(filename)
     txt = file.read()
     print(txt)
