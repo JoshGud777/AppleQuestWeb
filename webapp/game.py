@@ -6,12 +6,27 @@ cgitb.enable()
 
 def html(value='', print_data=''):
     '''Prints the HTML to the client with varibals'''
+    '''$$   printdata  $$
+       $$   command    $$
+       $$ printcommand $$'''
     html = lib.get_html(lib.HTML_DIR + 'game.html')
+    
     if print_data != '':
-        print_data = '<p>' + print_data + '</p>'
+        html = html.replace('$$printdata$$', print_data)
     else:
-        print_data = '<!--Print data goes here, if there is any-->'
+        html = html.replace('$$printdata$$', '')
 
+    if value != '':
+        html = html.replace('$$command$$', value)
+    else:
+        html = html.replace('$$command$$', '')
+
+    if True != False:
+        html = html.replace('$$printcommand$$', '')
+    else:
+        print('This is not the case you are looking for!')
+        print('P.S. The world is about to end!!!')
+        
     print(html)
 
 
