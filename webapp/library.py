@@ -246,6 +246,13 @@ def get_html(filepath):
     txt = file.read()
     return txt
 
+
+def print_me(filename):
+    file = open(filename)
+    txt = file.read()
+    print(txt)
+
+
 def get_cgi_data():
     '''gets the cgi data from the last form the client summited'''
     cgidata = cgi.FieldStorage()
