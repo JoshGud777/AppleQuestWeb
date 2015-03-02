@@ -20,6 +20,7 @@ def html_p():
 
 def main():
     '''Main'''
+    lib.print_header()
     html_p()
 
 
