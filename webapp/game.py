@@ -40,7 +40,7 @@ def cookie_read():
     else:
         returndata = '<!--\n'
         returndata += str(cookie)
-        retundata += '-->'
+        returndata += '-->'
 
     return returndata
 
