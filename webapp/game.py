@@ -27,6 +27,7 @@ def html_print(value='', print_data=''):
         print('This is not the case you are looking for!')
         print('P.S. The world is about to end!!!')
 
+    print(cookie_read())
     print(html)
 
 
@@ -35,11 +36,13 @@ def cookie_read():
     to the client'''
     cookie = lib.get_cookies()
     if cookie is None:
-        print('<!-- No Cookies -->')
+        return '<!-- No Cookies -->'
     else:
-        print('<!-- ', end="")
-        print(cookie, end="")
-        print('-->')
+        returndata = '<!--\n'
+        returndata += cookie
+        retundata += '-->'
+
+    return returndata
 
 
 def main():
