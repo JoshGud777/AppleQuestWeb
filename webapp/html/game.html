@@ -17,14 +17,23 @@ $$printcommand	$$
 </head>
 <body>
 <br>
-<p>-------------------------</p>
+<p>-----------OLD-----------</p>
+<p>$$oldcookie$$$</p>
+<p>-----------NEW-----------</p>
+<p>$$newcookie$$$</p>
+<p>----------PRINT----------</p>
 <p>$$printdata$$</p>
 <p>-------------------------</p>
 <form action="game.py">
 Command:
 <input type="text" name="command" value="$$command$$">
 <br><br>
-<input type="submit" value="Submit">
+<input type="submit" value="--- Send Command ---">
+</form>
+<br>
+<form action="game.py">
+<input type="hidden" name="newid" value="true">
+<input type="submit" value="--- Get New Session Information ---">
 </form>
 </body>
 </html>
