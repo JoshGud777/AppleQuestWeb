@@ -98,6 +98,7 @@ def issue_session_id(username, pword):
                 if sqlretry == 10:
                     return ('sqlerror', 'sqlerror', 'sqlerror')
 
+        save_conn()
         return (sessionid, exp, username)
 
     return ('noauth', 'noauth', 'noauth')
@@ -137,6 +138,7 @@ def renew_session_id(old_id, username):
                 if sqlretry == 10:
                     return 'sqlerror'
 
+        save_conn()
         return (sessionid, exp, username)
 
 
@@ -152,6 +154,7 @@ def delete_session(sessionid, username):
 
     c.execute("DELETE FROM sessions WHERE username = ? OR id = ?",
               [username, sessionid])
+    save_conn()
     return True
 
 
