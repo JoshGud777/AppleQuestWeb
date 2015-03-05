@@ -83,7 +83,7 @@ def main():
     else:
         print_data += '003\n'
         
-    lib.print_header(cookie)
+    lib.print_header(newcookie)
     html_print(command, print_data, newcookie)
     lib.save_close_conn()
 
