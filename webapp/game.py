@@ -67,7 +67,7 @@ def main():
     cookie = ''
     if renew == 'true':
         cookies = lib.get_cookies()
-        sessioninfo = renew_session_id(cookies['id'].value,cookies['username'].value)
+        sessioninfo = lib.renew_session_id(cookies['id'].value,cookies['username'].value)
         if type(sessioninfo) == str:
             print_data += 'Could not renew\n'
         else:
