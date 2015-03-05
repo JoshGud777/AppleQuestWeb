@@ -148,7 +148,7 @@ def delete_session(sessionid, username):
               [username, sessionid])
     dbdata = c.fetchone()
     if dbdata is None:
-        return True
+        return False
 
     c.execute("DELETE FROM sessions WHERE username = ? OR id = ?",
               [username, sessionid])
@@ -181,12 +181,15 @@ def check_user(username, pword):
         return False
 
 
-def slow_equal(a, b):
+def slow_equal(hexstrA, hexstrB):
     '''TODO : make the compair bit for bit in binary using XNOR OR SOMETHING
     Instead of comparing the string with == it checkes each part on at a
     time, this makes it slower and therefor harder to crack.'''
     length = 0
-    equal = 0
+    errors = 0
+
+    a = ''.join(format(ord(char), 'b') for char in hexstrA)
+    b = ''.join(format(ord(char), 'b') for char in hexstrB)
 
     if len(a) == len(b):
         length = len(a)
@@ -194,17 +197,15 @@ def slow_equal(a, b):
     else:
         time.sleep(1)
         length = 0
-        equal = 1000
+        errors = 1000
 
     for i in range(length):
-        if a[i] != b[i]:
-            equal += 1
+        errors += int(a[i]) ^ int(b[i])      
 
-        if equal == 0:
-            return True
-        else:
-            return False
-
+    if errors == 0:
+        return True
+    else:
+        return False
 
 def cookie_wright(sessionid, exp, username):
     '''give the imput data it returns a session cookie ment to be placed in the
