@@ -82,9 +82,9 @@ def main():
         print_data += '303\n'
     else:
         print_data += '003\n'
-        
-    #lib.print_header(newcookie)
-    print(newcookie)
+
+    lib.print_header()
+    lib.print_header(newcookie)
     html_print(command, print_data, newcookie)
     lib.save_close_conn()
 
