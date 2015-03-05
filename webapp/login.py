@@ -53,8 +53,7 @@ def main():
         lib.print_header()
         html_print()
 
-    lib.close_conn()
-
+    lib.save_close_conn()
 
 if __name__ == '__main__':
     main()

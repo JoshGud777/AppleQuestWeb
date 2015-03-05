@@ -72,7 +72,7 @@ def main():
         if type(sessioninfo) == str or sessioninfo == False:
             print_data += 'Could not renew\n'
         else:
-            newcookie = lib.cookie_wright(sessioninfo[0], sessioninfo[1], sessioninfo[2])
+            newcookie = lib.cookie_wright(sessioninfo)
 
     if command == '301':
         print_data += '103\n'
