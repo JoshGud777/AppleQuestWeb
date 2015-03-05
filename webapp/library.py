@@ -182,7 +182,8 @@ def check_user(username, pword):
 
 
 def slow_equal(a, b):
-    '''Instead of comparing the string with == it checkes each part on at a
+    '''TODO : make the compair bit for bit in binary using XNOR OR SOMETHING
+    Instead of comparing the string with == it checkes each part on at a
     time, this makes it slower and therefor harder to crack.'''
     length = 0
     equal = 0
