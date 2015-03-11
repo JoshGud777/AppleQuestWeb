@@ -55,7 +55,7 @@ def main():
     '''main'''
     lib.open_conn(lib.DB_DIR + 'AppleQuest.db')
     print_data = ''
-    newcookie = 'No New Cookie'
+    newcookie = ''
     cookie_read()
     form = lib.get_cgi_data()
     command = form.getfirst("command")
