@@ -18,7 +18,7 @@ def html_print(value='', print_data='', newcookie=''):
         html = html.replace('$$oldcookie$$$', '')
 
     if newcookie != '':
-        html = html.replace('$$newcookie$$$', newcookie)
+        html = html.replace('$$newcookie$$$', str(newcookie))
     else:
         html = html.replace('$$newcookie$$$', '')
         
