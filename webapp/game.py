@@ -53,7 +53,6 @@ def cookie_read():
 
 def main():
     '''main'''
-    lib.print_header()
     lib.open_conn(lib.DB_DIR + 'AppleQuest.db')
     print_data = ''
     newcookie = 'No New Cookie'
