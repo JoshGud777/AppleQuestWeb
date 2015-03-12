@@ -67,18 +67,19 @@ echo.
 
 echo ### Files to run pep8 and pyflakes on.
 echo ### - set lintfiles^=wwwApp
-set lintfiles=webapp
+set lintfiles0=webapp\ webapp_tests\
+
 echo.
 
 echo ### Running and Saving Pep8 data.
 echo ### - pep8 --config=pep8.cfg %%lintfiles%% ^> pep8.log
-pep8 --config=pep8.cfg %lintfiles% > pep8.log
+pep8 --config=pep8.cfg %lintfiles0% > pep8.log
 echo Done!
 echo.
 
 echo ### Running and Saving Pylint data.
 echo ### - pyflakes --rcfile=pylint.cfg %%lintfiles%% ^> pylint.log
-pylint --rcfile=pylint.cfg %lintfiles% > pylint.log
+pylint --rcfile=pylint.cfg %lintfiles0% > pylint.log
 echo Done!
 echo.
 
