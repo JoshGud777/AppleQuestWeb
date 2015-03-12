@@ -18,7 +18,7 @@ Library.py
 ''')
 
 
-class VarsTestCase(unittest.TestCase):
+class VarsTestCase(unittest.TestCase): # Global Varibales
 
     def test_HTML_DIR(self):
         self.assertEqual(lib.HTML_DIR, 'html\\')
@@ -35,17 +35,26 @@ class VarsTestCase(unittest.TestCase):
 
 class ConnTestCase(unittest.TestCase):
 
-    def test_open_conn(self):
-        global conn
-        global c
+    def test_open_conn_and_close_conn(self):  # Function 1 & 4
         lib.open_conn('db.db')
-        self.assertEqual(os.path.isfile('db.db'), True)
-        self.assertEqual(type(lib.conn), sqlite3.Connection)
-        self.assertEqual(type(lib.c), sqlite3.Cursor)
+        self.assertEqual(os.path.isfile('db.db'), True, 'Could not create and connect to database')
+        self.assertEqual(type(lib.conn), sqlite3.Connection, 'Is not sqlite3.Connection obj')
+        self.assertEqual(type(lib.c), sqlite3.Cursor, 'Is not sqlite3.Cursor obj')
         lib.close_conn()
         os.remove('db.db')
-        self.assert
+        self.assertEqual(os.path.isfile('db.db'), False, 'Could not delete file')
 
+    def test_get_cgi_data(self):
+        os.environ["REQUEST_METHOD"] = "GET"
+        os.environ["QUERY_STRING"] = "key0=data0&key1=data1&key2=data2"
+
+        form = lib.get_cgi_data()
+        key0data, key1data, key2data = form['key0'].value, form['key1'].value, form['key2'].value
+
+        self.assertEqual(key0data, 'data0')
+        self.assertEqual(key1data, 'data1')
+        self.assertEqual(key2data, 'data2')
+        
 if __name__ == "__main__":
     main()
     unittest.main()

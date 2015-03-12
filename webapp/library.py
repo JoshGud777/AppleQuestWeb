@@ -8,6 +8,7 @@ import os
 import sqlite3
 import time
 
+# Global Variables
 HTML_DIR = 'html\\'
 REDIRECT_DIR = 'redirect\\'
 DB_DIR = 'db17b1a5c2b2f6d370af2c59c885d5db\\'
@@ -19,7 +20,7 @@ conn = None
 c = None
 
 
-def open_conn(database):
+def open_conn(database): # Function 1
     '''Open SQL Connection to a given sqlite databsase'''
     global conn
     global c
@@ -27,23 +28,23 @@ def open_conn(database):
     c = conn.cursor()
 
 
-def save_conn():
+def save_conn(): # Function 2
     '''Savesthe conn'''
     conn.commit()
 
 
-def save_close_conn():
+def save_close_conn(): # Function 3
     '''Saves and closes the conn'''
     conn.commit()
     conn.close()
 
 
-def close_conn():
+def close_conn(): # Function 4
     '''Closes the database conn'''
     conn.close()
 
 
-def add_user(username, pword, email=None):
+def add_user(username, pword, email=None): # Function 5
     '''For a givven username and pasword and maybe an e-mail. Adds the user to
     the database. If the user is allready there then it returns false. if it
     added the database it sends True'''
@@ -66,7 +67,7 @@ def add_user(username, pword, email=None):
     return True
 
 
-def issue_session_id(username, pword):
+def issue_session_id(username, pword): # Function 6
     '''issues a session id for a given username, checks the user and pass
     agenst the db then sends back a sessionif, epx, and theusername it is sent
     agenst | noauth means username and password is wrrong | sqlerror means the
@@ -104,7 +105,7 @@ def issue_session_id(username, pword):
     return ('noauth', 'noauth', 'noauth')
 
 
-def renew_session_id(old_id, username):
+def renew_session_id(old_id, username): # Function 7
     '''givven the old session id and username it checks that the session is
     is still good then send a newone if OK, else it sends out a "sqlerror" in
     the case the server is erroring and a "expired" if the session is old'''
@@ -140,7 +141,7 @@ def renew_session_id(old_id, username):
         return (sessionid, exp, username)
 
 
-def delete_session(sessionid, username):
+def delete_session(sessionid, username): # Function 8
     '''deletes a session from the database in the case the client wants to
     "logoff"'''
     username = username.lower()
@@ -182,7 +183,7 @@ def check_user(username, pword):
         return False
 
 
-def slow_equal(hexstrA, hexstrB):
+def slow_equal(hexstrA, hexstrB): # Function 9
     '''TODO : make the compair bit for bit in binary using XNOR OR SOMETHING
     Instead of comparing the string with == it checkes each part on at a
     time, this makes it slower and therefor harder to crack.'''
@@ -208,7 +209,7 @@ def slow_equal(hexstrA, hexstrB):
         return False
 
 
-def cookie_wright(sessionid, exp, username):
+def cookie_wright(sessionid, exp, username): # Function 10
     '''give the imput data it returns a session cookie ment to be placed in the
     print_header function to send to the client'''
     cookie = http.cookies.BaseCookie()
@@ -222,7 +223,7 @@ def cookie_wright(sessionid, exp, username):
     return cookie
 
 
-def get_cookies():
+def get_cookies(): # Function 11
     '''returns a cookie opject of the request header sent to the server from
     the client'''
     cookie = http.cookies.BaseCookie()
@@ -232,7 +233,7 @@ def get_cookies():
     return None
 
 
-def print_header(cookie=''):
+def print_header(cookie=''): # Function 12
     '''Prints the standard HTTP header needed by CGI along with any cookie data
     sent to the function - cookie must be a cookie object'''
     print('Content-type: text/html')
@@ -242,7 +243,7 @@ def print_header(cookie=''):
         print()
 
 
-def get_html(filepath):
+def get_html(filepath): # Function 13
     '''For the given path it returns a str of all the data in that file.
     \n and all'''
     file = open(filepath)
@@ -250,14 +251,14 @@ def get_html(filepath):
     return txt
 
 
-def print_me(filename):
+def print_me(filename): # Function 14
     '''prints file to screen - use for redirects'''
     file = open(filename)
     txt = file.read()
     print(txt)
 
 
-def get_cgi_data():
+def get_cgi_data(): # Function 15
     '''gets the cgi data from the last form the client summited'''
     cgidata = cgi.FieldStorage()
     return cgidata
