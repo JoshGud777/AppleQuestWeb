@@ -12,7 +12,7 @@ HTML_DIR = 'html\\'
 REDIRECT_DIR = 'redirect\\'
 DB_DIR = 'db17b1a5c2b2f6d370af2c59c885d5db\\'
 COOKIE_MAX_AGE = 300
-COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
+#COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
 COOKIE_PATH = '/'
 
 conn = None
@@ -116,8 +116,6 @@ def renew_session_id(old_id, username):
         return False
     db_exp = int(dbdata[1])
 
-    print(int(time.time()))
-    print(db_exp)
     if int(time.time()) > db_exp:
         return 'expired'
     elif int(time.time()) <= db_exp:
@@ -219,7 +217,7 @@ def cookie_wright(sessionid, exp, username):
     cookie['username'] = username
     for morsel in cookie:
         cookie[morsel]['max-age'] = COOKIE_MAX_AGE
-        cookie[morsel]['domain'] = COOKIE_DOMAIN
+        #cookie[morsel]['domain'] = COOKIE_DOMAIN
         cookie[morsel]['path'] = COOKIE_PATH
     return cookie
 
