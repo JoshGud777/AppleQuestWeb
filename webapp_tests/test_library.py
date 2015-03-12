@@ -5,6 +5,7 @@ import os
 import unittest
 import time
 from webapp import library as lib
+from webapp import login as log
 
 def main():
     print('''^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -30,6 +31,8 @@ class VarsTestCase(unittest.TestCase):
     def test_REDIRECT_DIR(self):
         self.assertEqual(lib.REDIRECT_DIR, 'redirect\\')
 
+    def test_test(self):
+        self.assertEqual(1, 1)
 
 if __name__ == "__main__":
     main()
