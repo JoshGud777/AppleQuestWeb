@@ -4,6 +4,8 @@ two letters and as the last to. takes a bit of time to prosess
 '''
 import binascii
 import os
+import cgitb
+cgitb.enable()
 
 
 def main():

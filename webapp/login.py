@@ -1,7 +1,11 @@
 '''
 Login script
 '''
-import library as lib
+if __name__ == '__main__':
+    import library as lib
+else:
+    import webapp.library as lib
+
 import cgitb
 cgitb.enable()
 
