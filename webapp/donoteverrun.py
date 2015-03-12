@@ -7,6 +7,7 @@ import os
 import cgitb
 cgitb.enable()
 
+
 def main():
     '''Main Looping part'''
     print("Content-type: text/plain\n")

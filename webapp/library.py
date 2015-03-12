@@ -12,7 +12,7 @@ HTML_DIR = 'html\\'
 REDIRECT_DIR = 'redirect\\'
 DB_DIR = 'db17b1a5c2b2f6d370af2c59c885d5db\\'
 COOKIE_MAX_AGE = 300
-#COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
+# COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
 COOKIE_PATH = '/'
 
 conn = None
@@ -194,19 +194,19 @@ def slow_equal(hexstrA, hexstrB):
 
     if len(a) == len(b):
         length = len(a)
-        equal = 0
     else:
         time.sleep(1)
         length = 0
         errors = 1000
 
     for i in range(length):
-        errors += int(a[i]) ^ int(b[i])      
+        errors += int(a[i]) ^ int(b[i])
 
     if errors == 0:
         return True
     else:
         return False
+
 
 def cookie_wright(sessionid, exp, username):
     '''give the imput data it returns a session cookie ment to be placed in the
@@ -217,7 +217,7 @@ def cookie_wright(sessionid, exp, username):
     cookie['username'] = username
     for morsel in cookie:
         cookie[morsel]['max-age'] = COOKIE_MAX_AGE
-        #cookie[morsel]['domain'] = COOKIE_DOMAIN
+        # cookie[morsel]['domain'] = COOKIE_DOMAIN
         cookie[morsel]['path'] = COOKIE_PATH
     return cookie
 
