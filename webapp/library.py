@@ -11,7 +11,7 @@ import time
 HTML_DIR = 'html\\'
 REDIRECT_DIR = 'redirect\\'
 DB_DIR = 'db17b1a5c2b2f6d370af2c59c885d5db\\'
-COOKIE_MAX_AGE = 300
+# COOKIE_MAX_AGE = 300
 # COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
 COOKIE_PATH = '/'
 
@@ -216,7 +216,7 @@ def cookie_wright(sessionid, exp, username):
     cookie['exp'] = exp
     cookie['username'] = username
     for morsel in cookie:
-        cookie[morsel]['max-age'] = COOKIE_MAX_AGE
+        # cookie[morsel]['max-age'] = COOKIE_MAX_AGE
         # cookie[morsel]['domain'] = COOKIE_DOMAIN
         cookie[morsel]['path'] = COOKIE_PATH
     return cookie
