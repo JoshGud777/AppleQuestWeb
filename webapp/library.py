@@ -12,7 +12,7 @@ HTML_DIR = 'html\\'
 REDIRECT_DIR = 'redirect\\'
 DB_DIR = 'db17b1a5c2b2f6d370af2c59c885d5db\\'
 COOKIE_MAX_AGE = 300
-#COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
+COOKIE_DOMAIN = 'applequest.fallenofftheedge.com'
 COOKIE_PATH = '/'
 
 conn = None
@@ -124,7 +124,7 @@ def renew_session_id(old_id, username):
         while sqlgood is False:
             exp = int(time.time()) + 300
             # seconds till this is expired | 300 = 5 min | 1 = 1 sec
-            sessionid = binascii.hexlify(os.urandom(512)).decode("utf-8")
+            sessionid = binascii.hexlify(os.urandom(16)).decode("utf-8")
             try:
                 c.execute("DELETE FROM sessions WHERE username = ?",
                           [username])
@@ -217,7 +217,7 @@ def cookie_wright(sessionid, exp, username):
     cookie['username'] = username
     for morsel in cookie:
         cookie[morsel]['max-age'] = COOKIE_MAX_AGE
-        #cookie[morsel]['domain'] = COOKIE_DOMAIN
+        cookie[morsel]['domain'] = COOKIE_DOMAIN
         cookie[morsel]['path'] = COOKIE_PATH
     return cookie
 
