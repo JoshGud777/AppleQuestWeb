@@ -1,7 +1,7 @@
 AppleQuest
 ==========
 
-#TODO
+# TODO
 ====
 Fix This to mach the new app. Not the batch one.
 
@@ -24,7 +24,7 @@ Administrators, Moderators, Programmers, Authors, Testers, and Contributors
 --------------------------------------------------------------------------
 
 ### Administrators
-* **Josh** - The founder of the project
+* **Josh** - The founder of the project 
 
 ### Moderators
 * **Gentle** - Deals with organization of issues and corrections in documentation
